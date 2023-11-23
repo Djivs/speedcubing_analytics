@@ -23,6 +23,15 @@ results_df.drop_duplicates(subset=['competitionId', 'personId', 'roundTypeId', '
 
 results_df = results_df.drop(results_df[results_df.value1 == 0].index)
 
-df_2 = results_df[results_df['format'] == 'time']
+old_results = results_df[results_df['year'] <= 2011].count().sum()
+new_results = results_df[results_df['year'] > 2011].count().sum()
 
-print(df_2.groupby('eventName')['average'].describe())
+old_new_comp = pd.DataFrame({'year': ['2007-2011', '2012-2016'], 'count': [old_results, new_results]})
+# old_new_comp.set_index('year', inplace=True)
+# print(old_new_comp)
+# old_new_comp.plot(kind='pie', figsize=(6, 6), subplots=True)
+
+timed_results_df = results_df[results_df['format'] == 'time']['eventName'].value_counts()
+timed_results_df.plot(kind='bar', figsize=(7, 7))
+
+plt.show()
