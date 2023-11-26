@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 import hypotheses as hp
+import statistics
 
 
 def clear(results_df):
@@ -37,8 +38,14 @@ def main():
     # clean data
     results_df = clear(results_df)
 
+    # show statistics
+    # statistics.describe_results(results_df)
+
+    # show corr
+    print(statistics.corr(results_df[results_df.eventName == '3x3x3 Cube']))
+
     # run hypothesis
-    hp.h1(results_df)
+    # hp.h1(results_df)
 
     # show plot
     plt.show()
